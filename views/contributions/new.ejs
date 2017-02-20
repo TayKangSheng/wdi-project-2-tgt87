@@ -1,0 +1,32 @@
+<h2>Add new contribution:</h2>
+<form method="post" action="/contributions">
+  <div class="form-group">
+    <label for="action">I would like to:</label>
+    <select name="action">
+      <option value="giveaway">giveaway</option>
+      <option value="borrow">borrow</option>
+      <option value="exchange">exchange</option>
+    </select>
+  </div>
+  <div class="row">
+    <div class="form-group">
+      <label for="item">Item:</label>
+      <input type="text" class="form-control" name="item" id="item" placeholder="item">
+    </div>
+    <div class="form-group">
+      <label for="description">Description:</label>
+      <input type="text" class="form-control" name="description" id="description" placeholder="Provide details on what you would like to giveaway, borrow or exchange.">
+    </div>
+    <div class="form-group">
+      <label for="contributor">Preferred collection address:</label>
+      <input type="text" class="form-control" name="address" id="address" placeholder="eg. Orchard MRT">
+    </div>
+    <div class="form-group">
+      <label for="contributor">Contributor ID:</label>
+      <input type="text" class="form-control" name="contributor" id="contributor" value="<%=user.id%>" readonly="true">
+    </div>
+    <div class="form-group">
+      <button type="submit" class="btn btn-success btn-block">Add</button>
+    </div>
+  </div>
+</form>
