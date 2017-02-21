@@ -13,11 +13,12 @@ var contributionSchema = new mongoose.Schema({
   },
   address: String,
   // contributor: String,
-  contributor: [{
+  contributor: {
     type: mongoose.Schema.Types.ObjectId,
     ref: 'User'
-  }],
-  comments: [String]
+  },
+  contributorEmail: String,
+  comments: []
 })
 
 var Contribution = mongoose.model('Contribution', contributionSchema)

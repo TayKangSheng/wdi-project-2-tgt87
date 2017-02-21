@@ -1,8 +1,42 @@
-<h1>Hi, Welcome <%=user.local.email%> </h1>
-<pre><%=user%></pre>
+<h1>Hi, welcome <%=user.local.email%> </h1>
+<pre><%=contributions%></pre>
 
+<div class="row">
+  <h2>My Contributions</h2>
+  <% contributions.forEach(function(contribution) { %>
+    <div class="col-md-4">
+      <div class="panel panel-info">
+        <div class="panel-heading">
+          <h3 class="panel-title">
+            <%= contribution.item %>
+          </h3>
+        </div>
+        <div class="panel-body">
+          Description: <%=contribution.description%><br>
+          Action: <%=contribution.action%><br>
+          Status: <%=contribution.status%><br>
+          Preferred address: <%=contribution.address%><br>
+          <br>
+          <a
+            class="btn btn-warning"
+            href=<%= "/contributions/" + contribution.id + "/edit" %>>
+            Edit
+          </a>
+          <form
+            method="POST"
+            action="/contributions/<%= contribution.id%>?_method=DELETE"
+          >
+            <button class="btn btn-danger" type="submit">
+              Delete
+            </button>
+          </form>
+        </div>
+      </div>
+    </div>
+  <% }) %>
+
+<div class="col-md-12">
 <a href='/contributions' class="btn btn-primary">View available items</a>
-<a href='/contributions/new' class="btn btn-primary">Add contribution</a>
 
 <h2>Add new contribution:</h2>
 <form method="post" action="/contributions">
@@ -32,7 +66,12 @@
       <input type="text" class="form-control" name="contributor" id="contributor" value="<%=user.id%>" readonly="true">
     </div>
     <div class="form-group">
+      <label for="contributor">Contributor email:</label>
+      <input type="text" class="form-control" name="contributorEmail" id="contributorEmail" value="<%=user.local.email%>" readonly="true">
+    </div>
+    <div class="form-group">
       <button type="submit" class="btn btn-success btn-block">Add</button>
     </div>
   </div>
 </form>
+</div>
