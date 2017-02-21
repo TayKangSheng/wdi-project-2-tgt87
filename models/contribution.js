@@ -18,7 +18,10 @@ var contributionSchema = new mongoose.Schema({
     ref: 'User'
   },
   contributorEmail: String,
-  comments: []
+  comments: [{
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'Comment'
+  }]
 })
 
 var Contribution = mongoose.model('Contribution', contributionSchema)

@@ -1,6 +1,6 @@
 const Contribution = require('../models/contribution')
 const User = require('../models/user')
-
+const Comment = require('../models/comment')
 var contributionController = {
   list: function(req, res){
     Contribution.find({status: 'available'}, function(err, output){
@@ -34,7 +34,7 @@ var contributionController = {
   edit: function(req, res){
     Contribution.findById(req.params.id, function(err, output){
       if(err) throw err
-      console.log(output)
+      //console.log(output)
       res.render('contributions/edit', {contribution: output})
     })
   },
@@ -45,11 +45,26 @@ var contributionController = {
     })
   },
   delete: function(req, res) {
-  Contribution.findByIdAndRemove(req.params.id, function(err, todoItem) {
+  Contribution.findByIdAndRemove(req.params.id, function(err, contribution) {
     if (err) throw err
     res.redirect('/user')
   })
-}
+},
+  comment: function(req, res){
+    console.log('hi, i came into comment')
+    Comment.create(req.body, function(err, output) {
+      if (err) throw err
+      console.log(output)
+      Contribution.findById(req.params.id, function(err, contribution){
+        contribution.comments.push(output.id)
+        contribution.save(function(err, saved){
+          if(err) throw err
+
+        })
+      })
+      res.redirect('/contributions/' + req.params.id)
+    })
+  }
 }
 
 

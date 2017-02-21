@@ -14,4 +14,8 @@ router.put('/:id', contributionController.update)
 
 router.delete('/:id', contributionController.delete)
 
+//router.get('/:id/comment', contributionController.comment)
+
+router.post('/:id', contributionController.comment)
+
 module.exports = router
