@@ -1,18 +1,15 @@
-<h1>Edit Contribution</h1>
-
-<pre><%=contribution%></pre>
-
-<h2>Add new contribution:</h2>
+<h1>Edit Contribution:</h1>
+<hr>
 <form action=<%= "/contributions/" + contribution.id + "?_method=PUT" %> method="POST">
-  <div class="form-group">
-    <label for="action">I would like to:</label>
-    <select name="action">
-      <option value="giveaway">giveaway</option>
-      <option value="borrow">borrow</option>
-      <option value="exchange">exchange</option>
-    </select>
-  </div>
   <div class="row">
+    <div class="form-group">
+      <label for="action">I would like to:</label>
+      <select class="form-control" name="action">
+        <option value="giveaway">giveaway</option>
+        <option value="borrow">borrow</option>
+        <option value="exchange">exchange</option>
+      </select>
+    </div>
     <div class="form-group">
       <label for="item">Item:</label>
       <input type="text" class="form-control" name="item" id="item" value="<%=contribution.item%>">
@@ -27,7 +24,7 @@
     </div>
     <div class="form-group">
       <label for="status">Status:</label>
-      <select name="status">
+      <select class="form-control" name="status">
         <option value="available">available</option>
         <option value="unavailable">unavailable</option>
       </select>

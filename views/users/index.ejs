@@ -1,27 +1,38 @@
-<h1>Hi, welcome <%=user.local.email%> </h1>
-<pre><%=contributions%></pre>
-
 <div class="row">
-  <h2>My Contributions</h2>
+<h1>Hi, welcome <%=user.local.email%> </h1>
+<a href='/contributions' class="btn btn-primary">View available items</a>
+</div>
+<div class="row">
+  <h2>My Contributions:</h2>
+  <%if(contributions.length === 0){ %>
+    <p><i>You have yet to make a contribution</i></p>
+  <% } %>
   <% contributions.forEach(function(contribution) { %>
     <div class="col-md-4">
       <div class="panel panel-info">
         <div class="panel-heading">
           <h3 class="panel-title">
-            <%= contribution.item %>
+            Item: <%= contribution.item %>
           </h3>
         </div>
         <div class="panel-body">
-          Description: <%=contribution.description%><br>
           Action: <%=contribution.action%><br>
+          Description: <%=contribution.description%><br>
           Status: <%=contribution.status%><br>
           Preferred address: <%=contribution.address%><br>
-          <br>
+          Comments: <%=contribution.comments.length%><br>
+          <a
+            class="btn btn-info"
+            href=<%= "/contributions/" + contribution.id%>>
+            View or add comments
+          </a>
+          <br><br>
           <a
             class="btn btn-warning"
             href=<%= "/contributions/" + contribution.id + "/edit" %>>
             Edit
           </a>
+          <br><br>
           <form
             method="POST"
             action="/contributions/<%= contribution.id%>?_method=DELETE"
@@ -36,19 +47,20 @@
   <% }) %>
 
 <div class="col-md-12">
-<a href='/contributions' class="btn btn-primary">View available items</a>
 
+<div class="row">
 <h2>Add new contribution:</h2>
+</div>
 <form method="post" action="/contributions">
-  <div class="form-group">
-    <label for="action">I would like to:</label>
-    <select name="action">
-      <option value="giveaway">giveaway</option>
-      <option value="borrow">borrow</option>
-      <option value="exchange">exchange</option>
-    </select>
-  </div>
   <div class="row">
+    <div class="form-group">
+      <label for="action">I would like to:</label>
+      <select class="form-control" name="action">
+        <option value="giveaway">giveaway</option>
+        <option value="borrow">borrow</option>
+        <option value="exchange">exchange</option>
+      </select>
+    </div>
     <div class="form-group">
       <label for="item">Item:</label>
       <input type="text" class="form-control" name="item" id="item" placeholder="item">

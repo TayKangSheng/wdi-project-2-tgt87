@@ -1,13 +1,22 @@
 <h2>Contribution details:</h2>
-<pre><%=contribution %></pre>
 
-<h3>Item: <%=contribution.description%></h3>
-<h3>Description: <%=contribution.description%></h3>
+<h3>Item: <%=contribution.item%></h3>
 <h3>Action: <%=contribution.action%></h3>
+<h3>Description: <%=contribution.description%></h3>
 <h3>Status: <%=contribution.status%></h3>
 <h3>Preferred Collection Address: <%=contribution.address%></h3>
 <h3>Contributor: <%=contribution.contributorEmail%></h3>
 <h3>Comments:</h3>
+<div class="container">
+    <ul class="list-group">
+      <% if (contribution.comments.length > 0) { %>
+      <% contribution.comments.forEach(function(output) {%>
+        <p><%=output.commentor + ' commented: ' + output.comment%><p>
+      <% }) %>
+      <% } %>
+    </ul>
+</div>
+
 
 <form method="post" action=<%= "/contributions/" + contribution.id%>>
   <div class="form-group">
@@ -15,11 +24,11 @@
     <input type="text" class="form-control" name="comment" id="comment" placeholder="comment">
   </div>
   <div class="form-group">
-    <label for="commentor">commentor:</label>
+    <label for="commentor">commented by:</label>
     <input type="text" class="form-control" name="commentor" id="commentor" value="<%=user.local.email%>" readonly="true">
   </div>
   <div class="form-group">
-    <label for="commentor">contributionId:</label>
+    <label for="commentor">contribution Id:</label>
     <input type="text" class="form-control" name="contributionId" id="contributionId" value="<%=contribution.id%>" readonly="true">
   </div>
   <div class="form-group">
