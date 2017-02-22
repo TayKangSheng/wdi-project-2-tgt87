@@ -6,8 +6,8 @@
   <thead>
 	<tr>
 		<th>Item</th>
+    <th>Action</th>
 		<th>Description</th>
-		<th>Action</th>
 		<th>Preferred collection address</th>
     <th>More details</th>
 	</tr>
@@ -16,8 +16,8 @@
     <% contributions.forEach(function(contribution) { %>
       <tr>
       <td><%=contribution.item%></td>
-      <td><%=contribution.description%></td>
       <td><%=contribution.action%></td>
+      <td><%=contribution.description%></td>
       <td><%=contribution.address%></td>
       <td><a href="/contributions/<%=contribution.id%>">View details</a></td>
       </tr>
