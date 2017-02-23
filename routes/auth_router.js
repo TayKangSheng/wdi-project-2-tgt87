@@ -1,14 +1,15 @@
 const express = require('express')
 const router = express.Router()
 const authController = require('../controllers/auth_controller')
+const loggedIn = require('../middleware/loggedIn')
 
-router.get('/signup', authController.signup)
+router.get('/signup', loggedIn.isLoggedIn, authController.signup)
 
-router.post('/signup', authController.authSignup)
+router.post('/signup', loggedIn.isLoggedIn, authController.authSignup)
 
-router.get('/login', authController.login)
+router.get('/login', loggedIn.isLoggedIn, authController.login)
 
-router.post('/login', authController.authLogin)
+router.post('/login', loggedIn.isLoggedIn, authController.authLogin)
 
 router.get('/logout', authController.logout)
 

@@ -15,7 +15,7 @@ const flash = require('connect-flash')
 const cookieParser = require('cookie-parser')
 const MongoStore = require('connect-mongo')(session)
 
-const isNotLoggedIn = require('./middleware/isNotLoggedIn')
+const loggedIn = require('./middleware/loggedIn')
 
 const mongoose = require('mongoose')
 mongoose.connect(process.env.MONGODB_URI)
@@ -63,7 +63,7 @@ app.get('/', function (req, res) {
 const auth = require('./routes/auth_router')
 app.use('/', auth)
 
-app.use(isNotLoggedIn)
+app.use(loggedIn.isNotLoggedIn)
 const contributions = require('./routes/contribution_router')
 app.use('/contributions', contributions)
 

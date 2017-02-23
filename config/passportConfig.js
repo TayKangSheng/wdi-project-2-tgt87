@@ -18,6 +18,10 @@ passport.use('local-login', new LocalStrategy({
 }, function(req, email, givenpassword, next){
   User.findOne({'local.email': email}, function(err, foundUser){
     if(err) return next(err)
+    req.flash('flash', {
+      type: 'success',
+      message: 'Login Success.'
+    })
     if(!foundUser) {
       return next(err, false, req.flash('flash',{
       type: 'warning',
@@ -42,7 +46,7 @@ if(!foundUser.validPassword(givenpassword)) {
   }, function(req, email, password, next){
     User.findOne({'local.email': email}, function(err, foundUser){
       if(foundUser){
-        console.log('same user with same email found')
+        // console.log('same user with same email found')
         return next(null, false, req.flash('flash', {
           type: 'warning',
           message: 'This email is already being used.'
