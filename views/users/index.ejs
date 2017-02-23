@@ -1,15 +1,24 @@
+<% include ../partials/flash %>
 <div class="row">
 <h1>Hi, welcome <%=user.local.email%> </h1>
 <a href='/contributions' class="btn btn-primary">View available items</a>
 </div>
 <div class="row">
   <h2>My Contributions:</h2>
+  <%var color = 'info'%>
   <%if(contributions.length === 0){ %>
     <p><i>You have yet to make a contribution</i></p>
   <% } %>
   <% contributions.forEach(function(contribution) { %>
+    <%if(contribution.action === 'exchange'){%>
+      <%color = 'warning'%>
+    <%} else if(contribution.action === 'borrow') {%>
+      <%color = 'danger'%>
+      <% } else {%>
+      <%color = 'info'%>
+      <% } %>
     <div class="col-md-4">
-      <div class="panel panel-info">
+      <div class="panel panel-<%=color%>">
         <div class="panel-heading">
           <h3 class="panel-title">
             Item: <%= contribution.item %>
