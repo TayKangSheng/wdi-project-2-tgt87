@@ -3,7 +3,7 @@ const User = require('../models/user')
 const Comment = require('../models/comment')
 
 var contributionController = {
-  list: function(req, res, next) {
+  list: function(req, res, next){
     Contribution.find({status: 'available'}, function(err, output){
       if (err) return next(err)
       res.render('contributions/index', {contributions: output})
@@ -19,7 +19,25 @@ var contributionController = {
   },
   create: function(req, res, next){
     Contribution.create(req.body,function(err, output){
-      if (err) return next(err)
+      if (err) {
+      if (err.name === 'ValidationError') {
+        let errMessages = []
+        for (field in err.errors) {
+          errMessages.push(err.errors[field].message)
+        }
+        console.log(errMessages)
+        req.flash('flash', {
+          type: 'danger',
+          message: errMessages
+        })
+        res.redirect('/user')
+      }
+      return next(err)
+    }
+    req.flash('flash', {
+      type: 'success',
+      message: 'Successfully added new contribution'
+    })
       User.findById(output.contributor, function(err, creator){
         if (err) return next(err)
         creator.local.contributions.push(output.id)
@@ -39,12 +57,20 @@ var contributionController = {
   update: function(req, res, next){
     Contribution.findByIdAndUpdate(req.params.id, req.body, function(err, contribution) {
       if (err) return next(err)
+      req.flash('flash', {
+        type: 'success',
+        message: 'Successfully updated a contribution.'
+      })
       res.redirect('/user')
     })
   },
   delete: function(req, res, next) {
   Contribution.findByIdAndRemove(req.params.id, function(err, contribution) {
     if (err) return next(err)
+    req.flash('flash', {
+      type: 'danger',
+      message: 'Deleted a contribution.'
+    })
     res.redirect('/user')
   })
 },
