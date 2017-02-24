@@ -56,6 +56,13 @@ app.use(function(req, res, next){
   next()
 })
 
+const cloudinary = require('cloudinary')
+cloudinary.config({
+  cloud_name: 'dd7bqhq3q',
+  api_key: '518833358718444',
+  api_secret: 'qk-MjZlWQUoVuF6HeddZ4sWo9pc'
+})
+
 app.get('/', function (req, res) {
   res.render('homepage')
 })

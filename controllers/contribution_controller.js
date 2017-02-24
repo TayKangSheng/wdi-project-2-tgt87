@@ -1,6 +1,9 @@
 const Contribution = require('../models/contribution')
 const User = require('../models/user')
 const Comment = require('../models/comment')
+const cloudinary = require('cloudinary')
+const multer = require('multer')
+const upload = multer({ dest: './uploads/' })
 
 var contributionController = {
   list: function(req, res, next){
@@ -18,14 +21,27 @@ var contributionController = {
   })
   },
   create: function(req, res, next){
-    Contribution.create(req.body,function(err, output){
+    var arrOfCommentIds = []
+    for (var id in req.body.comments){
+      arrOfCommentIds.push(id)
+    }
+    cloudinary.uploader.upload(req.file.path, function(result) {
+    Contribution.create({
+      item: req.body.item,
+      description: req.body.description,
+      action: req.body.action,
+      address: req.body.address,
+      image: result.url,
+      contributor: req.body.contributor,
+      contributorEmail: req.body.contributorEmail,
+      comments: arrOfCommentIds
+      }, function(err, output){
       if (err) {
       if (err.name === 'ValidationError') {
-        let errMessages = []
+        var errMessages = []
         for (field in err.errors) {
           errMessages.push(err.errors[field].message)
         }
-        console.log(errMessages)
         req.flash('flash', {
           type: 'danger',
           message: errMessages
@@ -47,6 +63,7 @@ var contributionController = {
       })
       res.redirect('/user')
     })
+  })
   },
   edit: function(req, res, next){
     Contribution.findById(req.params.id, function(err, output){

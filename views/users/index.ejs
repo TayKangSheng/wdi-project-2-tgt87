@@ -25,6 +25,7 @@
           </h3>
         </div>
         <div class="panel-body">
+        <img src="<%=contribution.image%>" alt="<%=contribution.item%>" style="width:50px;height:50px;"><br>
           Action: <%=contribution.action%><br>
           Description: <%=contribution.description%><br>
           Status: <%=contribution.status%><br>
@@ -60,7 +61,7 @@
 <div class="row">
 <h2>Add new contribution:</h2>
 </div>
-<form method="post" action="/contributions">
+<form enctype="multipart/form-data" method="post" action="/contributions">
   <div class="row">
     <div class="form-group">
       <label for="action">I would like to:</label>
@@ -71,7 +72,7 @@
       </select>
     </div>
     <div class="form-group">
-      <label for="item">Item:</label>
+      <label for="item">*Item:</label>
       <input type="text" class="form-control" name="item" id="item" placeholder="item">
     </div>
     <div class="form-group">
@@ -82,6 +83,9 @@
       <label for="contributor">Preferred collection address:</label>
       <input type="text" class="form-control" name="address" id="address" placeholder="eg. Orchard MRT">
     </div>
+    <label for="image">*Upload Image:</label>
+    <input type="file" name="image"><br>
+    <p>*Required field</p>
     <div class="form-group">
       <label for="contributor">Contributor ID:</label>
       <input type="text" class="form-control" name="contributor" id="contributor" value="<%=user.id%>" readonly="true">
@@ -90,9 +94,7 @@
       <label for="contributor">Contributor email:</label>
       <input type="text" class="form-control" name="contributorEmail" id="contributorEmail" value="<%=user.local.email%>" readonly="true">
     </div>
-    <div class="form-group">
       <button type="submit" class="btn btn-success btn-block">Add</button>
-    </div>
   </div>
 </form>
 </div>

@@ -1,12 +1,14 @@
 const express = require('express')
 const router = express.Router()
 const contributionController = require('../controllers/contribution_controller')
+const multer = require('multer')
+const upload = multer({ dest: './uploads/' })
 
 router.get('/', contributionController.list)
 
 router.get('/:id', contributionController.show)
 
-router.post('/', contributionController.create)
+router.post('/', upload.single('image'), contributionController.create)
 
 router.get('/:id/edit', contributionController.edit)
 

@@ -2,7 +2,7 @@ var mongoose = require('mongoose')
 var contributionSchema = new mongoose.Schema({
   item: {
     type: String,
-    required: [true, 'Please specify your item']
+    required: [true, 'Please specify your item.']
   },
   description: String,
   action: String,
@@ -12,7 +12,10 @@ var contributionSchema = new mongoose.Schema({
     default: 'available'
   },
   address: String,
-  // contributor: String,
+  image: {
+    type: String,
+    required: [true, 'Please upload an image of your item.']
+  },
   contributor: {
     type: mongoose.Schema.Types.ObjectId,
     ref: 'User'
