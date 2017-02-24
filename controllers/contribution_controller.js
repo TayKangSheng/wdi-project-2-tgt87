@@ -2,8 +2,6 @@ const Contribution = require('../models/contribution')
 const User = require('../models/user')
 const Comment = require('../models/comment')
 const cloudinary = require('cloudinary')
-const multer = require('multer')
-const upload = multer({ dest: './uploads/' })
 
 var contributionController = {
   list: function(req, res, next){

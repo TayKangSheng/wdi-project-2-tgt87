@@ -1,12 +1,12 @@
 require('dotenv').config({silent: true})
 const express = require('express')
-const path = require('path')
-const debug = require('debug')
+// const path = require('path')
+// const debug = require('debug')
 const logger = require('morgan')
 const bodyParser = require('body-parser')
 const expressLayouts = require('express-ejs-layouts')
 const app = express()
-const router = express.Router()
+// const router = express.Router()
 const methodOverride = require('method-override')
 const passport = require('passport')
 
@@ -34,7 +34,7 @@ app.use(session({
     autoReconnect: true
   })
 }))
-// initialize passport into your application
+
 app.use(passport.initialize())
 app.use(passport.session())
 require('./config/passportConfig')(passport)
@@ -44,24 +44,23 @@ app.use(methodOverride('_method'))
 app.use(logger('dev'))
 
 app.use(bodyParser.urlencoded({ extended: true }))
-// app.set('views', path.join(__dirname, 'views'))
+
 app.use(expressLayouts)
 
 app.set('view engine', 'ejs')
 
-// routes to login & signup
-app.use(function(req, res, next){
+app.use(function (req, res, next) {
   res.locals.user = req.user
   res.locals.isAuthenticated = req.isAuthenticated()
   next()
 })
 
-const cloudinary = require('cloudinary')
-cloudinary.config({
-  cloud_name: 'dd7bqhq3q',
-  api_key: '518833358718444',
-  api_secret: 'qk-MjZlWQUoVuF6HeddZ4sWo9pc'
-})
+// const cloudinary = require('cloudinary')
+// cloudinary.config({
+//   cloud_name: process.env.CLOUD_NAME,
+//   api_key: '518833358718444',
+//   api_secret: 'qk-MjZlWQUoVuF6HeddZ4sWo9pc'
+// })
 
 app.get('/', function (req, res) {
   res.render('homepage')
