@@ -1,20 +1,15 @@
 require('dotenv').config({silent: true})
 const express = require('express')
-// const path = require('path')
-// const debug = require('debug')
 const logger = require('morgan')
 const bodyParser = require('body-parser')
 const expressLayouts = require('express-ejs-layouts')
 const app = express()
-// const router = express.Router()
 const methodOverride = require('method-override')
 const passport = require('passport')
-
 const session = require('express-session')
 const flash = require('connect-flash')
 const cookieParser = require('cookie-parser')
 const MongoStore = require('connect-mongo')(session)
-
 const loggedIn = require('./middleware/loggedIn')
 
 const mongoose = require('mongoose')
@@ -54,13 +49,6 @@ app.use(function (req, res, next) {
   res.locals.isAuthenticated = req.isAuthenticated()
   next()
 })
-
-// const cloudinary = require('cloudinary')
-// cloudinary.config({
-//   cloud_name: process.env.CLOUD_NAME,
-//   api_key: '518833358718444',
-//   api_secret: 'qk-MjZlWQUoVuF6HeddZ4sWo9pc'
-// })
 
 app.get('/', function (req, res) {
   res.render('homepage')

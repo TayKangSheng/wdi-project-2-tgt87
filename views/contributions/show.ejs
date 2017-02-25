@@ -1,17 +1,19 @@
 <div class="container">
-<h2>Contribution details:</h2>
+<h3>Contribution details:</h3>
 
-<img src="<%=contribution.image%>" alt="<%=contribution.item%>" style="width:300px;height:200px;">
-<h3>Item: <%=contribution.item%></h3>
-<h3>Action: <%=contribution.action%></h3>
-<h3>Description: <%=contribution.description%></h3>
-<h3>Status: <%=contribution.status%></h3>
-<h3>Preferred Collection Address: <%=contribution.address%></h3>
-<h3>Contributor: <%=contribution.contributorEmail%></h3>
-<h3>Comments:</h3>
+<img src="<%=contribution.image%>" alt="<%=contribution.item%>" style="width:250px;height:150px;">
+<h4>Item: <%=contribution.item%></h4>
+<h4>Action: <%=contribution.action%></h4>
+<h4>Description: <%=contribution.description%></h4>
+<h4>Status: <%=contribution.status%></h4>
+<h4>Preferred Collection Address: <%=contribution.address%></h4>
+<h4>Contributor: <%=contribution.contributorEmail%></h4>
+<h4>Comments:</h4>
 <div class="container">
     <ul class="list-group">
-      <% if (contribution.comments.length > 0) { %>
+      <%if(contribution.comments.length === 0){ %>
+        <p><i>There are no comments.</i></p>
+      <% } else {%>
       <% contribution.comments.forEach(function(output) {%>
         <p><%=output.commentor + ' commented: ' + output.comment%><p>
       <% }) %>
@@ -19,7 +21,7 @@
     </ul>
 </div>
 
-
+<div class="col-md-6">
 <form method="post" action=<%= "/contributions/" + contribution.id%>>
   <div class="form-group">
     <label for="comment">comment:</label>
@@ -37,4 +39,5 @@
     <button type="submit" class="btn btn-success btn-block">Add Comment</button>
   </div>
 </form>
+</div>
 </div>

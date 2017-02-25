@@ -15,11 +15,11 @@ passport.use('local-login', new LocalStrategy({
   usernameField: 'email',
   passwordField: 'password',
   passReqToCallback: true
-}, function(req, email, givenpassword, next){
-  User.findOne({'local.email': email}, function(err, foundUser){
+}, function (req, email, givenpassword, next) {
+  User.findOne({'local.email': email}, function (err, foundUser) {
     if(err) return next(err)
     if(!foundUser) {
-      return next(err, false, req.flash('flash',{
+      return next(err, false, req.flash('flash', {
       type: 'warning',
       message: 'This is not a registered email.'
     }))
@@ -31,8 +31,8 @@ if(!foundUser.validPassword(givenpassword)) {
     message: 'Access denied: Wrong Password'
   }))
 }
-  return next(err, foundUser)
-})
+    return next(err, foundUser)
+  })
 }))
 
   passport.use('local-signup', new LocalStrategy({
@@ -42,7 +42,6 @@ if(!foundUser.validPassword(givenpassword)) {
   }, function(req, email, password, next){
     User.findOne({'local.email': email}, function(err, foundUser){
       if(foundUser){
-        // console.log('same user with same email found')
         return next(null, false, req.flash('flash', {
           type: 'warning',
           message: 'This email is already being used.'
@@ -55,12 +54,12 @@ if(!foundUser.validPassword(givenpassword)) {
           }
         })
         newUser.save(function(err, output){
-        return next(null, output, req.flash('flash', {
-          type: 'success',
-          message: 'Signup success'
-        }))
+          return next(null, output, req.flash('flash', {
+            type: 'success',
+            message: 'Signup success'
+          }))
         })
       }
     })
   }))
- }
+}
