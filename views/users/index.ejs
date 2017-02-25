@@ -1,10 +1,14 @@
 <% include ../partials/flash %>
+<div class="container">
 <div class="row">
 <h1>Hi, welcome <%=user.local.email%> </h1>
 <a href='/contributions' class="btn btn-primary">View available items</a>
 </div>
+
+<%# List user contribution%>
 <div class="row">
   <h2>My Contributions:</h2>
+  <hr>
   <%var color = 'info'%>
   <%if(contributions.length === 0){ %>
     <p><i>You have yet to make a contribution</i></p>
@@ -55,12 +59,13 @@
       </div>
     </div>
   <% }) %>
-
-<div class="col-md-12">
-
-<div class="row">
-<h2>Add new contribution:</h2>
 </div>
+<%# Add contribution form%>
+<div class="col-md-6">
+  <div class="row">
+    <h2>Add new contribution:</h2>
+    <hr>
+  </div>
 <form enctype="multipart/form-data" method="post" action="/contributions">
   <div class="row">
     <div class="form-group">
@@ -94,7 +99,10 @@
       <label for="contributor">Contributor email:</label>
       <input type="text" class="form-control" name="contributorEmail" id="contributorEmail" value="<%=user.local.email%>" readonly="true">
     </div>
+    <div class="form-group">
       <button type="submit" class="btn btn-success btn-block">Add</button>
+    </div>
   </div>
 </form>
+</div>
 </div>

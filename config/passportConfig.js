@@ -18,10 +18,6 @@ passport.use('local-login', new LocalStrategy({
 }, function(req, email, givenpassword, next){
   User.findOne({'local.email': email}, function(err, foundUser){
     if(err) return next(err)
-    req.flash('flash', {
-      type: 'success',
-      message: 'Login Success.'
-    })
     if(!foundUser) {
       return next(err, false, req.flash('flash',{
       type: 'warning',

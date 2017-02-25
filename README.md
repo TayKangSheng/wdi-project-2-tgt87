@@ -13,9 +13,16 @@ Upon successful signup or login, user can create, update, delete an item as well
 
 ## Built With
 
-* Javascript
-* ejs
-* node
+* Ejs
+* Nodejs
 * Express
 * Passport
 * Bootstrap
+* Cloudinary
+
+## Acknowledgement
+Homepage Bootstrap theme: https://blackrockdigital.github.io/startbootstrap-landing-page/
+Homepage images:
+* https://cdn.shutterstock.com/shutterstock/videos/1750058/thumb/1.jpg?i10c=img.resize(height:72)
+* http://www.mes-conference.ru/images/awards/questionMark.gif
+Login & signup page template: https://dcrazed.com/css-html-login-form-templates/
