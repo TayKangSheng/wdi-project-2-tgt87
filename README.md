@@ -8,7 +8,7 @@ Upon successful signup or login, user can create, update, delete an item as well
 
 ## Live Version
 
-[heroku link](https://fathomless-journey-20010.herokuapp.com/)
+[heroku link](https://contribute1.herokuapp.com/)
 
 
 ## Built With
