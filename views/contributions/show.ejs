@@ -27,14 +27,11 @@
     <label for="comment">comment:</label>
     <input type="text" class="form-control" name="comment" id="comment" placeholder="comment">
   </div>
-  <div class="form-group">
-    <label for="commentor">commented by:</label>
-    <input type="text" class="form-control" name="commentor" id="commentor" value="<%=user.local.email%>" readonly="true">
-  </div>
-  <div class="form-group">
-    <label for="commentor">contribution Id:</label>
-    <input type="text" class="form-control" name="contributionId" id="contributionId" value="<%=contribution.id%>" readonly="true">
-  </div>
+
+  <input type="hidden" class="form-control" name="commentor" id="commentor" value="<%=user.local.email%>">
+
+  <input type="hidden" class="form-control" name="contributionId" id="contributionId" value="<%=contribution.id%>">
+
   <div class="form-group">
     <button type="submit" class="btn btn-success btn-block">Add Comment</button>
   </div>

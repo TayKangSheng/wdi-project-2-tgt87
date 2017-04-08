@@ -91,14 +91,11 @@
     <label for="image">*Upload Image:</label>
     <input type="file" name="image" required><br>
     <p>*Required field</p>
-    <div class="form-group">
-      <label for="contributor">Contributor ID:</label>
-      <input type="text" class="form-control" name="contributor" id="contributor" value="<%=user.id%>" readonly="true">
-    </div>
-    <div class="form-group">
-      <label for="contributor">Contributor email:</label>
-      <input type="text" class="form-control" name="contributorEmail" id="contributorEmail" value="<%=user.local.email%>" readonly="true">
-    </div>
+
+    <input type="hidden" class="form-control" name="contributor" id="contributor" value="<%=user.id%>">
+    
+    <input type="hidden" class="form-control" name="contributorEmail" id="contributorEmail" value="<%=user.local.email%>">
+
     <div class="form-group">
       <button type="submit" class="btn btn-success btn-block">Add</button>
     </div>

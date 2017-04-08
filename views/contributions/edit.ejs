@@ -31,19 +31,19 @@
         <option value="unavailable">unavailable</option>
       </select>
     </div>
-    <div class="form-group">
-      <label for="contributor">Contributor ID:</label>
-      <input type="text" class="form-control" name="contributor" id="contributor" value="<%=contribution.contributor%>" readonly="true">
-    </div>
-    <div class="form-group">
-      <label for="contributor">Contributor email:</label>
-      <input type="text" class="form-control" name="contributorEmail" id="contributorEmail" value="<%=contribution.contributorEmail%>" readonly="true">
-    </div>
+
+    <input type="hidden" class="form-control" name="contributor" id="contributor" value="<%=contribution.contributor%>">
+
+    <input type="hidden" class="form-control" name="contributorEmail" id="contributorEmail" value="<%=contribution.contributorEmail%>">
+
+    <small>Note: Image edit service is currently unavailable.</small>
+    <br><br>
+
     <div class="form-group">
       <button type="submit" class="btn btn-success btn-block">Update</button>
     </div>
   </div>
 </form>
-<small>Note: Image edit service is currently unavailable.</small>
+
 </div>
 </div>
